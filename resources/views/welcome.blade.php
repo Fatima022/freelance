@@ -33,27 +33,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav mx-0 mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorias
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">3D</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Branding</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Ilustraciones</a></li>
-                        </ul>
-                    </ul>
-
-                    <div class="ms-auto">
-                        <form class="d-flex">
-                            <input class="form-control mx-2" style="width:auto" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-info" type="submit">Search</button>
-                        </form>
-                    </div>
-
                     <!-- INICIAR SESION - REGISTRO -->
                     @if (Route::has('login'))
                         <div class="ms-auto">
@@ -62,9 +41,7 @@
                             @else
                                 <a href="{{ route('login') }}" role="button" class="btn btn-primary">Inciar sesión</a>
 
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" role="button" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Registrarse</a>
-                                @endif
+        
                             @endauth
                         </div>
                     @endif
@@ -73,22 +50,48 @@
             </nav>
             <!-- end NAV BAR-->
 
-            <h1>Subir Imagen</h1>
-            <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data"> 
-                {{ csrf_field() }}
+            <div class="container my-5">
+                <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+                <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                    <h1 class="display-4 fw-bold lh-1">Bienvenido a<br> Freelance</h1>
+                    <br>
+                    <p class="lead">¡Comperte tus nuevos diseños y proyectos con el mundo! </p>
+                    <p class="lead">Freelance es una comunidad digital que te permite promocionar tus habilidades y darte a conocer en la comunidad.</p>
+                    <br>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                    
+                    @if (Route::has('login'))
+                        <div class="">
+                            @auth
+                                <a href="{{ url('/proyectos') }}" role="button" class="btn btn-dark btn-lg">Mi Perfil</a>
+                            @else
+                                <a href="{{ route('login') }}" role="button" class="btn btn-primary btn-lg">Inciar sesión</a>
 
-                <input type="text" name="name"><br>
-                <input type="file" name="image"><br>
-                <button type="submit">Guardar imagen</button>
-            </form>
-            <br>
-            <hr>
-            <h2>Galeria</h2>
-            <hr>
-            <br>
-            @foreach ($images as $image)
-                <img src="{{ asset('img/' . $image->file) }}" alt="">
-            @endforeach
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" role="button" class=" btn-lg ml-4 text-sm text-gray-700 dark:text-gray-500 underline btn btn-dark">Registrarse</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                    <img class="rounded-lg-3" src="https://source.unsplash.com/800x600/?marketing, branding, modeling, ilustration" alt="" width="720">
+                </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="text-muted py-5">
+            <div class="container">
+                <p class="float-end mb-1">
+                <a href=""><ion-icon name="caret-up-outline" size="large"></ion-icon></a>
+                </p>
+                <p class="mb-1">Freelance &copy; </p>
+                <p class="mb-0">All rights reserved.</p>
+            </div>
+            </footer>
+            <!-- END FOOTER -->
             </div>
         </div>
     </body>

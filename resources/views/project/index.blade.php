@@ -47,7 +47,7 @@
                     {{ Auth::user()->name }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                    <li><a class="dropdown-item" href="#">Agregar Proyecto</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalCrear">Agregar Proyecto</a></li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -74,45 +74,58 @@
       @include('project.utilities._create_modal')
     </section>
   
-    <section class="py-5 container ">
+    
       <!-- CARD 1 -->
-      <div class="album py-3 bg-light">
+      <div class=" py- bg-light">
         <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col-md-5">
+          <div class="row justify-content-center">
               @foreach ($projects as $project)
-              <div class="card shadow-sm">
-                
+              <div class="card col-3 ms-3">
                 <table class="table table-sm ">
                 <tbody>
+                   <!-- IMG -->
                   <div class="bg-image hover-overlay ripple shadow-1-strong rounded">
                       <img src="{{ asset('img/' . $project->file) }}" class="card-img-top" alt="">
                   </div>
+                  <!-- END IMG -->
 
+                  <!-- TITULO -->
                   <div class="card-img-overlay">
                       <h1 class="card-title text-white text-center">{{$project->title}}</h1>
                   </div>
+                  <!-- END TITULO -->
 
+                  <!-- DESCRIPTION -->
                   <div class="card-body">
                     <p class="card-text">{{$project->description}}</p>
                   <div class="d-flex justify-content-between align-items-center">
-                    
+                  <!-- END DESCRIPTION -->
+                  
+                  <!-- BOTONOES DE ACCION -->
                   <div class="btn-group">
-                    <a href="#" role="button" class="btn btn-outline-info">Categoria</a>
+                    <!-- CATEGORIA -->
+                      @foreach($categories as $category)
+                        <a href="#" role="button" class="btn btn-outline-info">{{ $category->name}}</a>
+                      @endforeach
+                    <!-- END CATEGORIA -->
+
+                    <!-- EDITAR -->
                     <form method="GET" action="{{ route('proyectos.edit',$project->id) }}">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
                     </form>
+
+                    <!-- BORRAR -->
                     <form method="POST" action="{{ route('proyectos.destroy', $project->id) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                     </form>
                   </div>
-
+                  <!-- END BOTONOES DE ACCION -->
+                  
                   <small class="text-muted">
-                    <p class="mb-0">{{ Carbon\Carbon::parse($project->created_at)->diffForHumans() }}</p>
+                    <p class="mb-0 ms-3">{{ Carbon\Carbon::parse($project->created_at)->diffForHumans() }}</p>
                   </small>
                   </thead>
                 </tbody>
@@ -120,12 +133,9 @@
               </div>
               @endforeach
             </div>
-          </div>
         </div>
       </div>
       <!-- END CARD 1 -->
-
-      </section>
 
       <section class="py-5 container ">
       <!-- FOOTER -->

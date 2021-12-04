@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Image;
 use Session;
+use App\Models\Category;
 use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         $users = User::all();
+        $categories = Category::all();
 
-        return view('project.index')->with('projects', $projects)->with('users', $users);
+        return view('project.index')->with('projects', $projects)->with('users', $users)->with('categories', $categories);
     }
 
     
@@ -24,7 +26,7 @@ class ProjectController extends Controller
     {
         $users = User::all();
 
-        return view('project.create')->with('projects', $projects)->with('users',$users);
+        return view('project.create')->with('projects', $projects)->with('users',$users)->with('categories', $categories);
     }
 
     
@@ -36,7 +38,7 @@ class ProjectController extends Controller
         $project->description = $request->description;
         //$project->user_id = $request->user_id;
         //$project->file = $request->file;
-        //$project->category_id = $request->category_id;
+        //$project->category_name = $request->category_name;
 
         ///Funcionalidad de Imagen
         $archivo_imagen=$request->file('file');

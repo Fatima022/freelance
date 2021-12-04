@@ -21,10 +21,10 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="">Categoria</label>
-                        <select name="category" class="form-control">
-                            <option value="3D">3D</option>
-                            <option value="Branding">Branding</option>
-                            <option value="Ilsutraciones">Ilustración</option>
+                        <select class="form-control" id="exampleFormControlSelect1" name="category_id">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -35,6 +35,7 @@
                 <textarea class="form-control" name="description" rows="3"></textarea>
             </div>
             <br>
+            <label for="">Nombre de la imagen</label><br>
             <input type="text" name="name"><br>
             <input type="file" name="file"><br>
             <br>
